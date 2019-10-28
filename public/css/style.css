@@ -1,0 +1,17 @@
+.notfound .notfound-404 h1 {
+  font-size:200px;
+  color: grey;
+}
+
+.notfound h2 {
+  font-size: 26px;
+}
+
+@media only screen and (max-width: 767px) {
+  .notfound .notfound-404 h1 {
+    font-size: 20vw;
+  }
+  .notfound h2 {
+    font-size: 5vw;
+  }
+}
