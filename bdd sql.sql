@@ -4,37 +4,6 @@
 
 
 #------------------------------------------------------------
-# Table: candidats
-#------------------------------------------------------------
-
-CREATE TABLE candidats(
-        ID       Int  Auto_increment  NOT NULL ,
-        nom      Varchar (255) ,
-        prenom   Varchar (255) ,
-        civilite Varchar (4) ,
-        mail     Varchar (255) NOT NULL ,
-        tel      Varchar (12) ,
-        mdp      Varchar (255) NOT NULL
-	,CONSTRAINT candidats_PK PRIMARY KEY (ID)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: entreprises
-#------------------------------------------------------------
-
-CREATE TABLE entreprises(
-        ID           Int  Auto_increment  NOT NULL ,
-        nom          Varchar (255) ,
-        mail         Varchar (255) NOT NULL ,
-        adresse      Varchar (400) ,
-        siteInternet Varchar (255) ,
-        description  Varchar (1500)
-	,CONSTRAINT entreprises_PK PRIMARY KEY (ID)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: typesContrat
 #------------------------------------------------------------
 
@@ -54,6 +23,70 @@ CREATE TABLE villes(
         nom         Varchar (255) ,
         departement Int
 	,CONSTRAINT villes_PK PRIMARY KEY (ID)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: typesFichiers
+#------------------------------------------------------------
+
+CREATE TABLE typesFichiers(
+        ID  Int  Auto_increment  NOT NULL ,
+        nom Varchar (255)
+	,CONSTRAINT typesFichiers_PK PRIMARY KEY (ID)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: utilisateurs
+#------------------------------------------------------------
+
+CREATE TABLE utilisateurs(
+        ID      Int  Auto_increment  NOT NULL ,
+        mail    Varchar (255) NOT NULL ,
+        mdp     Varchar (255) NOT NULL ,
+        nom     Varchar (255) ,
+        tel     Varchar (12) ,
+        adresse Varchar (255)
+	,CONSTRAINT utilisateurs_PK PRIMARY KEY (ID)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: candidats
+#------------------------------------------------------------
+
+CREATE TABLE candidats(
+        ID       Int NOT NULL ,
+        prenom   Varchar (255) ,
+        civilite Varchar (4) ,
+        mail     Varchar (255) NOT NULL ,
+        mdp      Varchar (255) NOT NULL ,
+        nom      Varchar (255) ,
+        tel      Varchar (12) ,
+        adresse  Varchar (255)
+	,CONSTRAINT candidats_PK PRIMARY KEY (ID)
+
+	,CONSTRAINT candidats_utilisateurs_FK FOREIGN KEY (ID) REFERENCES utilisateurs(ID)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: entreprises
+#------------------------------------------------------------
+
+CREATE TABLE entreprises(
+        ID           Int NOT NULL ,
+        siteInternet Varchar (255) ,
+        description  Varchar (1500) ,
+        mail         Varchar (255) NOT NULL ,
+        mdp          Varchar (255) NOT NULL ,
+        nom          Varchar (255) ,
+        tel          Varchar (12) ,
+        adresse      Varchar (255)
+	,CONSTRAINT entreprises_PK PRIMARY KEY (ID)
+
+	,CONSTRAINT entreprises_utilisateurs_FK FOREIGN KEY (ID) REFERENCES utilisateurs(ID)
 )ENGINE=InnoDB;
 
 
@@ -81,17 +114,6 @@ CREATE TABLE annonces(
 
 
 #------------------------------------------------------------
-# Table: typesFichiers
-#------------------------------------------------------------
-
-CREATE TABLE typesFichiers(
-        ID  Int  Auto_increment  NOT NULL ,
-        nom Varchar (255)
-	,CONSTRAINT typesFichiers_PK PRIMARY KEY (ID)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: fichiers
 #------------------------------------------------------------
 
@@ -100,26 +122,24 @@ CREATE TABLE fichiers(
         chemin           Varchar (255) ,
         alt              Varchar (255) ,
         ID_typesFichiers Int ,
-        ID_candidats     Int ,
-        ID_entreprises   Int NOT NULL
+        ID_utilisateurs  Int
 	,CONSTRAINT fichiers_PK PRIMARY KEY (ID)
 
 	,CONSTRAINT fichiers_typesFichiers_FK FOREIGN KEY (ID_typesFichiers) REFERENCES typesFichiers(ID)
-	,CONSTRAINT fichiers_candidats0_FK FOREIGN KEY (ID_candidats) REFERENCES candidats(ID)
-	,CONSTRAINT fichiers_entreprises1_FK FOREIGN KEY (ID_entreprises) REFERENCES entreprises(ID)
+	,CONSTRAINT fichiers_utilisateurs0_FK FOREIGN KEY (ID_utilisateurs) REFERENCES utilisateurs(ID)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: postuler à
+# Table: postuler
 #------------------------------------------------------------
 
-CREATE TABLE postuler_a(
+CREATE TABLE postuler(
         ID           Int NOT NULL ,
         ID_candidats Int NOT NULL
-	,CONSTRAINT postuler_a_PK PRIMARY KEY (ID,ID_candidats)
+	,CONSTRAINT postuler_PK PRIMARY KEY (ID,ID_candidats)
 
-	,CONSTRAINT postuler_a_annonces_FK FOREIGN KEY (ID) REFERENCES annonces(ID)
-	,CONSTRAINT postuler_a_candidats0_FK FOREIGN KEY (ID_candidats) REFERENCES candidats(ID)
+	,CONSTRAINT postuler_annonces_FK FOREIGN KEY (ID) REFERENCES annonces(ID)
+	,CONSTRAINT postuler_candidats0_FK FOREIGN KEY (ID_candidats) REFERENCES candidats(ID)
 )ENGINE=InnoDB;
 
