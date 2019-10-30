@@ -1,14 +1,10 @@
 <?php
 namespace App\Model;
 
-class Candidat {
-  private $id;
-  private $nom;
+class Candidat extends Utilisateur {
   private $prenom;
   private $civilite;
-  private $mail;
-  private $tel;
-  private $mdp;
+
 
 
   public function __construct(array $arrayOfValues = null){
@@ -26,39 +22,6 @@ class Candidat {
       }
     }
   }
-
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
 
     /**
      * @return mixed
@@ -92,53 +55,6 @@ class Candidat {
         $this->civilite = $civilite;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
-
-    /**
-     * @param mixed $mail
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTel()
-    {
-        return $this->tel;
-    }
-
-    /**
-     * @param mixed $tel
-     */
-    public function setTel($tel)
-    {
-        $this->tel = $tel;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMdp()
-    {
-        return $this->mdp;
-    }
-
-    /**
-     * @param mixed $mdp
-     */
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
-    }
 
 
 }
