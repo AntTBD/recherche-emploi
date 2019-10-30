@@ -5,8 +5,8 @@ require __DIR__.'/../../../vendor/autoload.php';
 //demarrer les sessions
 session_start();
 
-
-include __DIR__.'/../../../includes/connexionBDD.php';
+use App\Model\Repository\Repository;
+$base = Repository::connect();
 
 ?>
 

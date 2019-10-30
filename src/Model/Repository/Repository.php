@@ -1,7 +1,8 @@
 <?php
+
+
 namespace App\Model\Repository;
 
-require __DIR__.'/../../../includes/config.inc.php';
 use PDO;
 
 class Repository{
@@ -13,7 +14,8 @@ class Repository{
 
     public static function connect(){
         try {
-            $pdo = new PDO("mysql:host=".$database["host"].";dbname=".$database["base"].";charset=UTF8",$database["user"],$database["pass"]);
+            require __DIR__.'/../../../includes/config.inc.php';//importation de la config de la BDD
+            $pdo = new PDO("mysql:host=".$database["host"].";dbname=".$database["base"].";charset=UTF8", $database["user"], $database["password"]);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return new self($pdo);
         } catch (PDOException $e) {

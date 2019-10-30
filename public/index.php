@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/../src/View/Commons/header.php';
+require __DIR__.'/../src/View/Commons/header.php';
 
 use App\Controller\DefaultController;
 
@@ -20,6 +20,9 @@ elseif ('/index.php/mentionsLegales' == $uri) {
 elseif ('/index.php/add' == $uri) {
     ArticleController::add();
 } */
+elseif ('/index.php/deconnexion' == $uri) {
+    DefaultController::deconnexion();
+}
 else {
     DefaultController::erreur404();
 }
