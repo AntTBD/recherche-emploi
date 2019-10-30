@@ -12,9 +12,15 @@ class DefaultController
         $emplacement=$_SERVER["DOCUMENT_ROOT"];
         require __DIR__.'/../view/base.php';
     }
+
     public static function mentionsLegales() {
         require __DIR__.'/../view/mentionsLegales.php';
     }
+
+    public static function deconnexion() {
+        require __DIR__.'/../view/deconnexion.php';
+    }
+
     public static function erreur404() {
         require __DIR__.'/../view/erreur404.php';
     }

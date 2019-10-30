@@ -1,0 +1,31 @@
+<?php
+session_destroy();
+//header('Location: /index.php');
+
+?>
+
+<center>
+    <h1>Vous avez bien été déconnecté !</h1>
+    <p>Redirection dans <span id="compt"></span> seconde<span id="s"></span>.
+    <p><a href="/index.php"><button class="btn btn-success" type="button">ACCUEIL</button></a></p>
+    <noscript><meta type="refresh" content="5;URL=\index.php" /></noscript>
+</center>
+
+<script>
+    var compt = document.getElementById('compt'),
+        s = document.getElementById('s'),
+        durRest = 10;
+
+    function refreshTimer(){
+        compt.innerHTML = durRest;
+        s.innerHTML = (durRest > 1) ? "s" : null;
+
+        if (durRest <= 0)
+            window.location.href = '/index.php';
+        else {
+            durRest--;
+            setTimeout(refreshTimer, 1000);
+        }
+    }
+    refreshTimer();
+</script>
