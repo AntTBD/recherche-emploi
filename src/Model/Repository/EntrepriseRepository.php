@@ -5,9 +5,9 @@ namespace App\Model\Repository;
 
 use PDO;
 use App\Model\Repository\Repository;
-use App\Model\Candidat;
+use App\Model\Entreprise;
 
-class CandidatRepository
+class EntrepriseRepository
 {
     private $base;
 

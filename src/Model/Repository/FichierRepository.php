@@ -5,9 +5,9 @@ namespace App\Model\Repository;
 
 use PDO;
 use App\Model\Repository\Repository;
-use App\Model\Candidat;
+use App\Model\Fichier;
 
-class CandidatRepository
+class FichierRepository
 {
     private $base;
 
@@ -15,5 +15,5 @@ class CandidatRepository
         $this->base = $base;
     }
 
-
+    //ajouter les fonctions : add / remove / modifier / find
 }
