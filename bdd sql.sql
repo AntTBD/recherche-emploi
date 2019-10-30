@@ -68,6 +68,7 @@ CREATE TABLE annonces(
         dateDebut       Date NOT NULL ,
         dateFin         Date NOT NULL ,
         description     Varchar (1500) ,
+        salaire         Varchar (255) ,
         ID_entreprises  Int ,
         ID_villes       Int ,
         ID_typesContrat Int
