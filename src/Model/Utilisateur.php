@@ -30,6 +30,18 @@ class Utilisateur
         }
     }
 
+    public function __toString()
+    {
+        $toString = 'Utilisateur [ ';
+        foreach($this as $key => $value){
+            $method = 'get'.ucfirst($key);
+            if(method_exists($this,$method)){
+                $toString .= $key.' => "'.$this->$method($value).'", ';
+            }
+        }
+        return $toString.']';
+    }
+
     /**
      * @return mixed
      */
@@ -125,6 +137,4 @@ class Utilisateur
     {
         $this->adresse = $adresse;
     }
-
-
 }

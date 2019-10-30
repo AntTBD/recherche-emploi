@@ -9,21 +9,16 @@ class Entreprise extends Utilisateur
     private $siteInternet;
     private $description;
 
-
-    public function __construct(array $arrayOfValues = null){
-        if($arrayOfValues != null){
-            $this->hydrate($arrayOfValues);
-        }
-    }
-
-
-    public function hydrate(array $donnees){
-        foreach($donnees as $key => $value){
-            $method = 'set'.ucfirst($key);
+    public function __toString()
+    {
+        $toString = 'Entreprise [ ';
+        foreach($this as $key => $value){
+            $method = 'get'.ucfirst($key);
             if(method_exists($this,$method)){
-                $this->$method($value);
+                $toString .= $key.' => "'.$this->$method($value).'", ';
             }
         }
+        return $toString.']';
     }
 
     /**
@@ -57,6 +52,4 @@ class Entreprise extends Utilisateur
     {
         $this->description = $description;
     }
-
-
 }

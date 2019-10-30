@@ -1,27 +1,25 @@
 <?php
+
+
 namespace App\Model;
 
-class Candidat extends Utilisateur {
-  private $prenom;
-  private $civilite;
 
+class Candidat extends Utilisateur
+{
+    private $prenom;
+    private $civilite;
 
-
-  public function __construct(array $arrayOfValues = null){
-    if($arrayOfValues != null){
-      $this->hydrate($arrayOfValues);
+    public function __toString()
+    {
+        $toString = 'Candidat [ ';
+        foreach($this as $key => $value){
+            $method = 'get'.ucfirst($key);
+            if(method_exists($this,$method)){
+                $toString .= $key.' => "'.$this->$method($value).'", ';
+            }
+        }
+        return $toString.']';
     }
-  }
-
-
-  public function hydrate(array $donnees){
-    foreach($donnees as $key => $value){
-      $method = 'set'.ucfirst($key);
-      if(method_exists($this,$method)){
-        $this->$method($value);
-      }
-    }
-  }
 
     /**
      * @return mixed
@@ -54,7 +52,4 @@ class Candidat extends Utilisateur {
     {
         $this->civilite = $civilite;
     }
-
-
-
 }
