@@ -1,8 +1,3 @@
-<?php
-session_destroy();
-//header('Location: /index.php');
-
-?>
 <!-- https://openclassrooms.com/forum/sujet/rediriger-apres-x-secondes-et-afficher-le-nombre-de-secon-35039#message-6572592 -->
 <center>
     <h1>Vous avez bien été déconnecté !</h1>
