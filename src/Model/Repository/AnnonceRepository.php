@@ -3,15 +3,15 @@
 
 namespace App\Model\Repository;
 
-use PDO;
 use App\Model\Repository\Repository;
+use PDO;
 use App\Model\Annonce;
 
 class AnnonceRepository
 {
     private $base;
 
-    public function __construct(repository $base){
+    public function __construct(Repository $base){
         $this->base = $base;
     }
 
