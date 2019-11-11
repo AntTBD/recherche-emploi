@@ -31,6 +31,8 @@ elseif ('/index.php/inscription_candidat' == $uri) {
     ConnexionController::connexion($base, 'Entreprise');
 } elseif ('/index.php/deconnexion' == $uri) {
     ConnexionController::deconnexion();
+}elseif ('/index.php/mon_profil' == $uri) {
+    ConnexionController::mon_profil();
 } else {
     DefaultController::erreur404();
 }
