@@ -3,6 +3,7 @@ use recherche_emploi;
 insert into typesfichiers(nom) values ('Photo Candidat');
 insert into typesfichiers(nom) values ('Logo Entreprise');
 insert into typesfichiers(nom) values ('CV');
+insert into typesfichiers(nom) values ('Lettre de motivation');
 
 
 insert into typescontrat(nom) values ('CDI');
