@@ -21,6 +21,11 @@ class Candidat extends Utilisateur
         return $toString.']';
     }
 
+    public function getClassName()
+    {
+        return substr(strrchr(__CLASS__, "\\"), 1);
+    }
+
     /**
      * @return mixed
      */

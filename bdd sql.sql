@@ -42,12 +42,11 @@ CREATE TABLE typesFichiers(
 #------------------------------------------------------------
 
 CREATE TABLE utilisateurs(
-        id      Int  Auto_increment  NOT NULL ,
-        mail    Varchar (255) NOT NULL ,
-        mdp     Varchar (255) NOT NULL ,
-        nom     Varchar (255) ,
-        tel     Varchar (12) ,
-        adresse Varchar (255)
+        id   Int  Auto_increment  NOT NULL ,
+        mail Varchar (255) NOT NULL ,
+        mdp  Varchar (255) NOT NULL ,
+        nom  Varchar (255) ,
+        tel  Varchar (12)
 	,CONSTRAINT utilisateurs_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
@@ -73,7 +72,8 @@ CREATE TABLE candidats(
 CREATE TABLE entreprises(
         id           Int NOT NULL ,
         siteInternet Varchar (255) ,
-        description  Varchar (1500)
+        description  Varchar (1500) ,
+        adresse      Varchar (255)
 	,CONSTRAINT entreprises_PK PRIMARY KEY (id)
 
 	,CONSTRAINT entreprises_utilisateurs_FK FOREIGN KEY (id) REFERENCES utilisateurs(id)

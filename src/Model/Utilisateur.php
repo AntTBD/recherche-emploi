@@ -11,7 +11,6 @@ class Utilisateur
     protected $mdp;
     protected $nom;
     protected $tel;
-    protected $adresse;
 
 
     public function __construct(array $arrayOfValues = null){
@@ -41,6 +40,13 @@ class Utilisateur
         }
         return $toString.']';
     }
+
+    public function getClassName()
+    {
+        return substr(strrchr(__CLASS__, "\\"), 1);
+    }
+
+
 
     /**
      * @return mixed
@@ -120,21 +126,5 @@ class Utilisateur
     public function setTel($tel)
     {
         $this->tel = $tel;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * @param mixed $adresse
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
     }
 }

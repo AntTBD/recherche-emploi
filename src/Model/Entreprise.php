@@ -8,6 +8,8 @@ class Entreprise extends Utilisateur
 {
     private $siteInternet;
     private $description;
+    private $adresse;
+
 
     public function __toString()
     {
@@ -19,6 +21,11 @@ class Entreprise extends Utilisateur
             }
         }
         return $toString.']';
+    }
+
+    public function getClassName()
+    {
+        return substr(strrchr(__CLASS__, "\\"), 1);
     }
 
     /**
@@ -51,5 +58,21 @@ class Entreprise extends Utilisateur
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param mixed $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
     }
 }
