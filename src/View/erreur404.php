@@ -1,6 +1,3 @@
-<?php
-header('HTTP/1.1 404 Not Found');
-?>
 <center>
   <div class="notfound">
     <div class="notfound-404">
