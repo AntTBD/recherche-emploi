@@ -39,6 +39,11 @@ class Repository{
         return $response;
     }
 
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
 
 
 }
