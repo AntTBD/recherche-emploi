@@ -9,6 +9,7 @@
 <?php
 
 use App\Model\Utilisateur;
+use App\Model\Repository\UtilisateurRepository;
 use App\Model\Candidat;
 use App\Model\Entreprise;
 
@@ -41,6 +42,6 @@ $entreprise = new Entreprise([
     'description'=> 'ceci est une entreprise'
 ]);
 
-echo '<p><b>user :</b> '.$user->__toString().'</p><br>';
-echo '<p><b>candidat :</b> '.$candidat->__toString().'</p><br>';
-echo '<p><b>entreprise :</b> '.$entreprise->__toString().'</p><br>';
+echo '<p><b>'.$user->getClassName().' :</b> '.$user->__toString().'</p><br>';
+echo '<p><b>'.$candidat->getClassName().' :</b> '.$candidat->__toString().'</p><br>';
+echo '<p><b>'.$entreprise->getClassName().' :</b> '.$entreprise->__toString().'</p><br>';
