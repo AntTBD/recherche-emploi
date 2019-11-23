@@ -116,4 +116,45 @@ class UtilisateurRepository
         return false;
 
     }
+
+    public function modify(int $id, Utilisateur $user){
+      //Le $this->base conrrespond a notre object PDO passer dans le __construct pour rappel.
+    //  $response = $this->base->prepare('UPDATE utilisateurs (mail, nom, tel) VALUES(:mail, :nom, :tel) WHERE id = $_SESSION[\'id\'];');
+      $sql = "UPDATE utilisateurs SET mail=?, nom=?, tel=? WHERE id=?";
+      $stmt = $this->base->prepare($sql);
+      $stmt->execute([$user->getMail(),$user->getNom(),$user->getTel(),$_SESSION['id']]);
+
+    //  $response->bindValue(':mail', $user->getMail());
+    //  $response->bindValue(':nom', $user->getNom());
+    //  $response->bindValue(':tel', $user->getTel());
+
+      $user->hydrate(['id' => $this->base->lastInsertId()]);
+
+      if( $user instanceof Candidat){
+        /*  $resp = $this->base->prepare('UPDATE candidats (prenom) VALUES(:prenom) WHERE id = $_SESSION[\'id\'];');
+          $resp->bindValue(':prenom', $user->getPrenom());
+
+          $resp->execute();
+          $resp = null;
+      */
+
+          $sql = "UPDATE candidats SET prenom=? WHERE id=?";
+          $stmt = $this->base->prepare($sql);
+          $stmt->execute([$user->getPrenom(),$_SESSION['id']]);
+
+      } else {
+        /*  $resp = $this->base->prepare('UPDATE entreprises(siteInternet, description, adresse) VALUES(:siteInternet, :description, :adresse); WHERE id = $_SESSION[\'id\'];');
+          $resp->bindValue(':siteInternet', $user->getSiteInternet());
+          $resp->bindValue(':description', $user->getDescription());
+          $resp->bindValue(':adresse', $user->getAdresse());
+
+          $resp->execute();
+          $resp = null;
+      */
+
+          $sql = "UPDATE entreprises SET siteInternet=?, description=?, adresse=? WHERE id=?";
+          $stmt = $this->base->prepare($sql);
+          $stmt->execute([$user->getSiteInternet(),$user->getDescription(),$user->getAdresse(),$_SESSION['id']]);
+      }
+    }
 }

@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="card-body text-dark">
-        <form method='post' action="" onSubmit="return validate()">
+        <form method='post' action="">
           <div class="form-group form-row">
               <label class="col-sm-2 col-form-label" for="nom">Photo de Profil</label>
               <div class="col-sm-10">
@@ -25,13 +25,13 @@
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="prenom">Prenom</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="Prenom" type="text" name="prenom" value="<?php echo  $user->getPrenom() ?>">
+                    <input class="form-control" id="prenom" type="text" name="prenom" value="<?php echo  $user->getPrenom() ?>">
                 </div>
             </div>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="mail">E-mail</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="email" name="email" id="mail" value="<?php echo  $user->getMail() ?>">
+                    <input class="form-control" type="email" name="email" id="email" value="<?php echo  $user->getMail() ?>">
                 </div>
             </div>
             <div class="form-group form-row">
