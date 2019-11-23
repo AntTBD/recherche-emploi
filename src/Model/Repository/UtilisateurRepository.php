@@ -91,12 +91,11 @@ class UtilisateurRepository
                     }
                     return false;
                 }
-                return false;
+              return false;
             }
             return false;
         }
         return false;
-
     }
 
     //retourne l’oject du personnage hydrater ainsi que remplir mes sessions

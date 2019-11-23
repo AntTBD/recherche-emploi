@@ -135,8 +135,4 @@ class ConnexionController
         $_SESSION = null;
         require __DIR__ . '/../View/Connexion/deconnexion.php';
     }
-
-    public static function mon_profil() {
-        require __DIR__ . '/../View/Profil/mon_profil_'.strtolower($_SESSION['type']).'.php';
-    }
 }

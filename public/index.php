@@ -7,6 +7,7 @@ require __DIR__ . '/../src/View/Commons/header.php';
 
 use App\Controller\ConnexionController;
 use App\Controller\DefaultController;
+use App\Controller\ProfilesControlers;
 
 
 // route the request internally
@@ -32,7 +33,7 @@ elseif ('/index.php/inscription_candidat' == $uri) {
 } elseif ('/index.php/deconnexion' == $uri) {
     ConnexionController::deconnexion();
 }elseif ('/index.php/mon_profil' == $uri) {
-    ConnexionController::mon_profil();
+    ProfilesControlers::mon_profil($base);
 } else {
     DefaultController::erreur404();
 }
