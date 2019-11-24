@@ -38,7 +38,7 @@ class ProfilesControlers
             'mdp' => 'ui',
             'nom' => $_POST['nom'],
             'tel' => $_POST['tel'],
-            'adresse' => $ville,
+            'adresse' => $_POST['adresse'],
             'siteInternet' => $_POST['siteInternet'],
             'description' => $_POST['description']
           ]);

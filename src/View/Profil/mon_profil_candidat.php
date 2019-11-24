@@ -11,8 +11,8 @@
               <label class="col-sm-2 col-form-label" for="nom">Photo de Profil</label>
               <div class="col-sm-10">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="CV" aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="CV" data-browse="Partager">Indiquez la Photo que vous souhaitez utiliser</label>
+                  <input type="file" class="custom-file-input" id="photo" aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="photo" data-browse="Partager">Indiquez la Photo que vous souhaitez utiliser</label>
                 </div>
               </div>
           </div>
