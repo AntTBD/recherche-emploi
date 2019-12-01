@@ -6,11 +6,12 @@
         </div>
     </div>
     <div class="card-body text-dark">
-        <form method='post' action="" id="formEntreprise">
+        <form method='post' action="" onsubmit="upload()" id="formEntreprise" enctype="multipart/form-data">
           <div class="form-group form-row">
               <label class="col-sm-2 col-form-label" for="nom">Logo de l'entreprise</label>
               <div class="col-sm-10">
                 <div class="custom-file">
+                  <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                   <input type="file" class="custom-file-input" id="CV" aria-describedby="inputGroupFileAddon01">
                   <label class="custom-file-label" for="CV" data-browse="Partager">Indiquez le logo que vous souhaitez utiliser</label>
                 </div>
@@ -60,3 +61,49 @@
         </div>
     </div>
 </div>
+
+<script>
+<?php
+    function upload() {
+      if(isset($_FILES['avatar']))
+      {
+        $dossier = 'upload/';
+        $fichier = basename($_FILES['avatar']['name']);
+        $taille_maxi = 100000;
+        $taille = filesize($_FILES['avatar']['tmp_name']);
+        $extensions = array('.png', '.gif', '.jpg', '.jpeg');
+        $extension = strrchr($_FILES['avatar']['name'], '.');
+        //Verification du fichier uploadé
+        if(!in_array($extension, $extensions)) //Verification de l'extention
+        {
+          $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg, txt ou doc...';
+        }
+        if($taille>$taille_maxi) //Verification de la taille
+        {
+          $erreur = 'Le fichier est trop gros...';
+        }
+        if(!isset($erreur))
+        {
+          //On remplace les caractères spéciaux
+          $fichier = strtr($fichier,
+              'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
+              'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+              $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+              if(move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier))
+              {
+                echo 'Upload effectué avec succès !';
+              }
+              else
+              {
+                echo 'Echec de l\'upload !';
+              }
+            }
+            else
+            {
+              echo $erreur;
+            }
+          }
+
+    }
+   ?>
+</script>

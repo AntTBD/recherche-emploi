@@ -113,15 +113,15 @@
 <script>
     function validate() {
 
-        var a = document.getElementById("password").value;
-        var b = document.getElementById("passwordConfirm").value;
+      var a = document.getElementById("password").value;
+      var b = document.getElementById("passwordConfirm").value;
 
-        if (a!=b) {
-            $('#modal').modal('show');
-            return false;
-        } else {
-            $('#modal').modal('hide');
-            return true;
-        }
+      if (a!=b) {
+          $('#modal').modal('show');
+          return false;
+      } else {
+          $('#modal').modal('hide');
+          return true;
+      }
     }
 </script>
