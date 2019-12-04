@@ -1,5 +1,5 @@
 <!-- formulaire de connexion -->
-<div class="card" style="background-color: #e3e3e3">
+<div class="card background_profil_<?= strtolower($class) ?>">
     <div class="card-header">
         <div class="text-center justify-content-center">
             <img src="/images/logo.png" alt="Logo" style="width:100px;">
@@ -39,3 +39,4 @@
         </form>
     </div>
 </div>
+<!-- fin formulaire de connexion -->

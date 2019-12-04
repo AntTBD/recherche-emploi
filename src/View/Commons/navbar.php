@@ -34,7 +34,19 @@ include __DIR__ . '/../../../includes/function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             <?php if (isset($_SESSION['id'])) {
-                                echo $_SESSION['nom'];
+                                if($_SESSION['type']=="Candidat"){
+                                    if(isset($_SESSION['civilite'])){ ?>
+                                        <img class="d-inline-block align-middle" src="<?php
+                                        if($_SESSION['civilite']=="Mr"){ ?>
+                                                /fichiers/avatars/avatarH.png
+                                            <?php } elseif($_SESSION['civilite']=="Mme"){ ?>
+                                                /fichiers/avatars/defaultF.png
+                                            <?php } ?>" alt="" width="35" height="35" style="border-radius: 50%;border-color: black;">
+                                    <?php }
+                                } elseif($_SESSION['type']=="Entreprise"){ ?>
+                                    <img class="d-inline-block align-middle" src="/fichiers/avatars/avatarEntreprise.png" alt="" width="35" height="35" style="order-color: black;">
+                                <?php } ?>
+                                <?php echo $_SESSION['nom'];
                             } else {
                                 echo 'CONNEXION';
                             } ?>

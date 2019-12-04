@@ -10,8 +10,8 @@
         </div>
     </div>
 <?php } ?>
-<!-- formulaire d'inscription -->
-<div class="card" style="background-color: #e3e3e3">
+<!-- formulaire d'inscription candidat -->
+<div class="card background_profil_candidat">
     <div class="card-header">
         <div class="text-center justify-content-center">
             <img src="/images/logo.png" alt="Logo" style="width:100px;">
@@ -36,31 +36,31 @@
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="nom">Nom *</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="nom" type="text" name="nom" placeholder="Entrer votre nom" required>
+                    <input class="form-control" id="nom" type="text" name="nom" placeholder="Entrez votre nom" required>
                 </div>
             </div>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="prenom">Prénom *</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="prenom" id="prenom" placeholder="Entrer votre prénom" required>
+                    <input class="form-control" type="text" name="prenom" id="prenom" placeholder="Entrez votre prénom" required>
                 </div>
             </div>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="mail">E-mail *</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="email" name="email" id="mail" placeholder="Entrer votre e-mail" required>
+                    <input class="form-control" type="email" name="email" id="mail" placeholder="Entrez votre e-mail" required>
                 </div>
             </div>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="tel">Téléphone</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="tel" name="tel" id="tel" placeholder="Entrer votre numéro de téléphone">
+                    <input class="form-control" type="tel" name="tel" id="tel" placeholder="Entrez votre numéro de téléphone">
                 </div>
             </div>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="password">Mot de passe *</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="password" name="password" id="password" placeholder="Entrer un mot de passe" aria-describedby="btn_eye" maxlength="20" minlength="8" required>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Entrez un mot de passe" aria-describedby="btn_eye" maxlength="20" minlength="8" required>
                     <small class="text-muted">
                         Doit contenir entre 8 et 20 caractères.
                     </small>
@@ -69,7 +69,7 @@
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label" for="passwordConfirm">Confirmer *</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer votre mot de passe" aria-describedby="btn_eye" maxlength="20" minlength="8" required>
+                    <input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmez votre mot de passe" aria-describedby="btn_eye" maxlength="20" minlength="8" required>
                     <small class="text-muted">
                         Doit contenir entre 8 et 20 caractères.
                     </small>
@@ -125,3 +125,4 @@
         }
     }
 </script>
+<!-- fin formulaire d'inscription candidat-->

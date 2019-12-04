@@ -2,6 +2,7 @@
             </div>
         </div>
     </main>
+    <!-- fin page content -->
     <!-- footer -->
     <footer class="footer mt-auto py-3" style="background-color:#f1f1f1;">
         <div class="container-fluid">

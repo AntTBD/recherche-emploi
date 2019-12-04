@@ -1,3 +1,4 @@
+<!-- deconnexion -->
 <!-- https://openclassrooms.com/forum/sujet/rediriger-apres-x-secondes-et-afficher-le-nombre-de-secon-35039#message-6572592 -->
 <center>
     <h1>Vous avez bien été déconnecté !</h1>
@@ -9,7 +10,7 @@
 <script>
     var compt = document.getElementById('compt'),
         s = document.getElementById('s'),
-        durRest = 10;
+        durRest = 5;
 
     function refreshTimer(){
         compt.innerHTML = durRest;
@@ -24,3 +25,4 @@
     }
     refreshTimer();
 </script>
+<!-- fin deconnexion -->

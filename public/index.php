@@ -7,6 +7,8 @@ require __DIR__ . '/../src/View/Commons/header.php';
 
 use App\Controller\ConnexionController;
 use App\Controller\DefaultController;
+use App\Controller\AnnonceController;
+use App\Controller\ProfilController;
 
 
 // route the request internally
@@ -14,14 +16,10 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if ('/index.php' == $uri || '/' == $uri) {
     DefaultController::index();
+    AnnonceController::voirLastAnnonces($base);
 } elseif ('/index.php/mentionsLegales' == $uri) {
     DefaultController::mentionsLegales();
-} /*elseif ('/index.php/show' == $uri && isset($_GET['id'])) {
-    ArticleController::show($_GET['id']);
-} elseif ('/index.php/add' == $uri) {
-    ArticleController::add();
-} */
-elseif ('/index.php/inscription_candidat' == $uri) {
+} elseif ('/index.php/inscription_candidat' == $uri) {
     ConnexionController::inscription($base, 'Candidat');
 } elseif ('/index.php/inscription_entreprise' == $uri) {
     ConnexionController::inscription($base, 'Entreprise');
@@ -31,6 +29,18 @@ elseif ('/index.php/inscription_candidat' == $uri) {
     ConnexionController::connexion($base, 'Entreprise');
 } elseif ('/index.php/deconnexion' == $uri) {
     ConnexionController::deconnexion();
+} elseif ('/index.php/ajoutAnnonce' == $uri){
+    AnnonceController::ajoutAnnonce($base);
+} elseif('/index.php/voirAnnonces' == $uri){
+    AnnonceController::voirAnnonces($base);
+} elseif('/index.php/afficherAnnonce' == $uri){
+    AnnonceController::afficherAnnonce($base);
+} elseif('/index.php/modifierAnnonce' == $uri){
+    AnnonceController::modifierAnnonce($base);
+} elseif('/index.php/supprimerAnnonce' == $uri){
+    AnnonceController::supprimerAnnonce($base);
+}elseif ('/index.php/mon_profil' == $uri) {
+    ProfilController::mon_profil($base);
 } else {
     DefaultController::erreur404();
 }

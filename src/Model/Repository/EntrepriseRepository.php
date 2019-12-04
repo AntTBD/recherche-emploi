@@ -28,7 +28,21 @@ class EntrepriseRepository extends UtilisateurRepository
         }
 
         return false;
-
     }
+
+    public function findAll()
+    {
+    	$listeEntreprises=array();
+    	$query = $this->base->query('SELECT utilisateurs.id, mail, mdp, nom, tel, siteInternet, description, adresse  FROM 
+    		utilisateurs INNER JOIN entreprises ON utilisateurs.id = entreprises.id');
+    	$resultats = $query->fetchAll(PDO::FETCH_ASSOC);
+    	foreach ($resultats as $resultat) {
+    		array_push($listeEntreprises,new Entreprise($resultat));
+    	}
+    	return $listeEntreprises;
+    }
+
+
+
 
 }

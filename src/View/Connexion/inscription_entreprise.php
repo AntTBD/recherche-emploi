@@ -1,5 +1,5 @@
-<!-- formulaire d'inscription -->
-<div class="card" style="background-color: #e3e3e3">
+<!-- formulaire d'inscription entreprise -->
+<div class="card background_profil_entreprise">
     <div class="card-header">
         <div class="text-center justify-content-center">
             <img src="/images/logo.png" alt="Logo" style="width:100px;">
@@ -118,3 +118,4 @@
         }
     }
 </script>
+<!-- fin formulaire d'inscription entreprise -->

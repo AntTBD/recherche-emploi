@@ -8,8 +8,8 @@ session_start();
 use App\Model\Repository\Repository;
 $base = Repository::connect();
 
-/*
-use App\Model\Repository\CandidatRepository;
+
+/*use App\Model\Repository\CandidatRepository;
 use App\Model\Repository\EntrepriseRepository;
 //avoir en permance mon personnage une fois connecter
 if (isset($_SESSION['id'])) {
@@ -45,6 +45,26 @@ if (isset($_SESSION['id'])) {
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
     <script src="/js/bootstrap.min.js"></script>
     <title>Recherche Emploi</title>
+    <style type="text/css" >
+        .background_profil_candidat{
+            background-color : #e3e3e3;
+        }
+        .background_profil_entreprise{
+            background-color : #d6dbff;
+        }
+        .background_profil{
+            <?php if (isset($_SESSION['id'])) {
+                if (isset($_SESSION['type']) && $_SESSION['type']==='Candidat'){
+                    echo "background-color : #e3e3e3;";
+                }elseif (isset($_SESSION['type']) && $_SESSION['type']==='Entreprise'){
+                    echo "background-color : #d6dbff;";
+                }else{
+                    echo "background-color : #e3e3e3;";
+                }
+            }
+            ?>
+        }
+    </style>
 </head>
 <body id="myBody" class="d-flex flex-column h-100">
 <?php

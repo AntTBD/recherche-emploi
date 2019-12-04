@@ -13,6 +13,7 @@ class Annonce
     private $dateFin;
     private $description;
     private $salaire;
+    private $tempsTravail;
     private $idEntreprise;
     private $idVille;
     private $idTypeContrat;
@@ -156,6 +157,22 @@ class Annonce
     public function setSalaire($salaire)
     {
         $this->salaire = $salaire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTempsTravail()
+    {
+        return $this->tempsTravail;
+    }
+
+    /**
+     * @param mixed $tempsTravail
+     */
+    public function setTempsTravail($tempsTravail)
+    {
+        $this->tempsTravail = $tempsTravail;
     }
 
     /**

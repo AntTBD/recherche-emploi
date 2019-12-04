@@ -9,11 +9,24 @@ $i = 1;
 $menu[$i]['link'] = $dir.'/recherche_offres';
 $menu[$i]['nom'] = 'Rechercher une offre';
 
-$i = 2;
-$menu[$i]['link'] = $dir.'/poster_offres';
-$menu[$i]['nom'] = 'Poster une offre';
 
 if (isset($_SESSION['id'])) {
+    if(isset($_SESSION["type"]) && $_SESSION["type"]==="Entreprise"){
+        $i = 2;
+        $menu[$i]['link'] = $dir.'/ajoutAnnonce';
+        $menu[$i]['nom'] = 'Ajouter une annonce';
+
+        $i = 3;
+        $menu[$i]['link'] = $dir.'/voirAnnonces';
+        $menu[$i]['nom'] = 'Voir mes annonces';
+    }else if(isset($_SESSION["type"]) && $_SESSION["type"]==="Candidat"){
+        $i = 2;
+        $menu[$i]['link'] = $dir.'/mesAnnoncesLikes';
+        $menu[$i]['nom'] = 'Voir mes annonces préférées';
+
+    }
+
+
     $i = 0;
     $menuConnexion[$i]['link'] = $dir.'/mon_profil';
     $menuConnexion[$i]['nom'] = 'Mon Profil';
