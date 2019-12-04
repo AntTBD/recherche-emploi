@@ -5,6 +5,8 @@ namespace App\Model\Repository;
 use App\Model\Utilisateur;
 use App\Model\Candidat;
 use App\Model\Entreprise;
+use App\Model\Repository\CandidatRepository;
+use App\Model\Repository\EntrepriseRepository;
 
 
 class UtilisateurRepository
@@ -118,14 +120,20 @@ class UtilisateurRepository
         }
 
         return false;
-
     }
 
     public function modify(int $id, Utilisateur $user){
-        if(find($id)){
+        if($user instanceof Candidat)
+            $userRepository = new UtilisateurRepository($this->base);
+        else if ( $user instanceof Entreprise)
+            $userRepository = new EntrepriseRepository($this->base);
+        else
+            $userRepository = new UtilisateurRepository($this->base);
+
+        if($userRepository->find($id)){
             //Le $this->base conrrespond a notre object PDO passer dans le __construct pour rappel.
             //  $response = $this->base->prepare('UPDATE utilisateurs (mail, nom, tel) VALUES(:mail, :nom, :tel) WHERE id = $_SESSION[\'id\'];');
-            $sql = "UPDATE utilisateurs SET mail=:mail, nom=:nom, tel=:tel WHERE id=?";
+            $sql = "UPDATE utilisateurs SET mail=?, nom=?, tel=? WHERE id=?;";
             $stmt = $this->base->prepare($sql);
             $stmt->execute([$user->getMail(),$user->getNom(),$user->getTel(),$_SESSION['id']]);
             //  $response->bindValue(':mail', $user->getMail());
