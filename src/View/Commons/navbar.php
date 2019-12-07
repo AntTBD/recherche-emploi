@@ -34,19 +34,38 @@ include __DIR__ . '/../../../includes/function.php';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                             <?php if (isset($_SESSION['id'])) {
-                                if($_SESSION['type']=="Candidat"){
-                                    if(isset($_SESSION['civilite'])){ ?>
+                                $photoDeProfil="DocumentsUtilisateurs/PhotoDeProfil/".$_SESSION['id'];
+                                if(file_exists ($photoDeProfil.".png")){ $photoDeProfil=$photoDeProfil.".png"; }
+                                else if(file_exists ($photoDeProfil.".jpg")){ $photoDeProfil=$photoDeProfil.".jpg"; }
+                                else if(file_exists ($photoDeProfil.".jpeg")){ $photoDeProfil=$photoDeProfil.".jpeg"; }
+                                if($photoDeProfil==="DocumentsUtilisateurs/PhotoDeProfil/".$_SESSION['id']){
+                                    if($_SESSION['type']=="Candidat"){
+                                        if (isset($_SESSION['civilite'])) { ?>
                                         <img class="d-inline-block align-middle" src="<?php
-                                        if($_SESSION['civilite']=="Mr"){ ?>
+                                            if ($_SESSION['civilite'] == "Mr") { ?>
                                                 /fichiers/avatars/avatarH.png
-                                            <?php } elseif($_SESSION['civilite']=="Mme"){ ?>
+                                            <?php } elseif ($_SESSION['civilite'] == "Mme") { ?>
                                                 /fichiers/avatars/defaultF.png
-                                            <?php } ?>" alt="" width="35" height="35" style="border-radius: 50%;border-color: black;">
-                                    <?php }
-                                } elseif($_SESSION['type']=="Entreprise"){ ?>
-                                    <img class="d-inline-block align-middle" src="/fichiers/avatars/avatarEntreprise.png" alt="" width="35" height="35" style="order-color: black;">
-                                <?php } ?>
-                                <?php echo $_SESSION['nom'];
+                                            <?php } ?>" alt="" width="35" height="35"
+                                             style="border-radius: 50%;border-color: black;">
+                                        <?php }
+                                    }elseif($_SESSION['type']=="Entreprise") {
+                                        if (!file_exists("DocumentsUtilisateurs/PhotoDeProfil/" . $_SESSION['id'] . ".png")) { ?>
+                                            <img class="d-inline-block align-middle"
+                                                 src="/fichiers/avatars/avatarEntreprise.png" alt="" width="35" height="35"
+                                                 style="order-color: black;">
+                                        <?php }else{ ?>
+                                            <img class="d-inline-block align-middle"
+                                                 src="/DocumentsUtilisateurs/PhotoDeProfil/<?= $_SESSION['id'] ?>.png" alt="" width="35" height="35"
+                                                 style="order-color: black;">
+                                        <?php }
+                                    }
+                                }else{?>
+                                <img class="d-inline-block align-middle"
+                                     src="/<?= $photoDeProfil ?>" alt="" width="auto" height="35"
+                                     style="order-color: black;">
+                                <?php }
+                                echo $_SESSION['nom'];
                             } else {
                                 echo 'CONNEXION';
                             } ?>
