@@ -10,11 +10,6 @@
           <div class="form-group form-row">
               <label class="col-sm-2 col-form-label" for="nom">Logo de l'entreprise</label>
               <div class="col-sm-10">
-                  <!--<div class="custom-file">
-                      <input type="file" class="custom-file-input" id="Logo" name="Logo" required>
-                      <label class="custom-file-label" for="Logo">Choose file...</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                  </div>-->
                 <div class="custom-file">
                   <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                     <input type="file" name = "USERFILE">
