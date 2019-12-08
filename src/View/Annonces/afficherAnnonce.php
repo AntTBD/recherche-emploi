@@ -32,13 +32,15 @@
             <p class="card-text"><b>Ville : </b><?= $ville->getNom() ?></p>
         </li>
     </ul>
-    <div class="card-body">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-            <a class="btn btn-primary btn-danger" href="<?= $del ?>" class="card-link">Supprimer</a>
-            <a class="btn btn-primary btn-warning" href="<?= $modif ?>" class="card-link">Modifier</a>
+    <?php if(isset($_SESSION['type']) && $_SESSION['type']==="Entreprise" && $_SESSION["id"]===$entreprise->getId()){?>
+        <div class="card-body">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <a class="btn btn-primary btn-danger" href="<?= $del ?>" class="card-link">Supprimer</a>
+                <a class="btn btn-primary btn-warning" href="<?= $modif ?>" class="card-link">Modifier</a>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </div>
 <!-- fin affichage d'une annonce -->
 

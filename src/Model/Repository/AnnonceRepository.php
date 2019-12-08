@@ -110,7 +110,7 @@ class AnnonceRepository
     }
 
     public function modify(int $id, Annonce $annonce){
-        if(findById($id)){
+        if($this->findById($id)){
             $response = $this->base->prepare('UPDATE annonces SET intitule = :intitule, domaine = :domaine, dateDebut = :dateDebut, dateFin = :dateFin, description = :description, salaire = :salaire, tempsTravail = :tempsTravail, idEntreprise = :idEntreprise, idVille = :idVille, idTypeContrat = :idTypeContrat WHERE id = :id');
             $response->bindValue(':id',         $id);
             $response->bindValue(':intitule',       $annonce->getIntitule());
