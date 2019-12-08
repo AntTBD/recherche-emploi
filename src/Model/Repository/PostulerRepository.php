@@ -22,4 +22,13 @@ class PostulerRepository
 
         $response->execute();
     }
+
+    public function exists($id, $idCandidat) {
+        $response = $this->base->prepare('SELECT COUNT(*) FROM postuler WHERE id = :id AND idCandidat = :idCandidat;');
+        $response->bindValue(':id', $id);
+        $response->bindValue(':idCandidat', $idCandidat);
+        $response->execute();
+
+        return (bool) $response->fetchColumn();
+    }
 }
