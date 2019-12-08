@@ -40,7 +40,14 @@
                 <a class="btn btn-primary btn-warning" href="<?= $modif ?>" class="card-link">Modifier</a>
             </div>
         </div>
-    <?php } ?>
+    <?php } elseif(isset($_SESSION['type']) && $_SESSION['type']==="Candidat") {?>
+      <div class="card-body">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+              <a class="btn btn-primary btn-success" href="<?= $postuler ?>" class="card-link">Postuler</a>
+              <!--<a class="btn btn-primary btn-warning" href="<?= $favori ?>" class="card-link">Ajouter aux favoris</a> -->
+          </div>
+      </div>
+<?php    } ?>
 </div>
 <!-- fin affichage d'une annonce -->
-

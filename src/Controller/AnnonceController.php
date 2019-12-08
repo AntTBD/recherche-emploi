@@ -112,6 +112,7 @@ class AnnonceController
 
                 $del = '/index.php/supprimerAnnonce?id='.$annonce->getId();
                 $modif = '/index.php/modifierAnnonce?id='.$annonce->getId();
+                $postuler = '/index.php/postuler?id='.$annonce->getId();
 
                 require __DIR__.'/../view/Annonces/afficherAnnonce.php';
             }

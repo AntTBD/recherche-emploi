@@ -9,6 +9,7 @@ use App\Controller\ConnexionController;
 use App\Controller\DefaultController;
 use App\Controller\AnnonceController;
 use App\Controller\ProfilController;
+use App\Controller\PostulerController;
 
 
 // route the request internally
@@ -41,6 +42,8 @@ if ('/index.php' == $uri || '/' == $uri) {
     AnnonceController::supprimerAnnonce($base);
 }elseif ('/index.php/mon_profil' == $uri) {
     ProfilController::mon_profil($base);
+}elseif ('/index.php/postuler' == $uri) {
+    PostulerController::postuler($base);
 } else {
     DefaultController::erreur404();
 }
