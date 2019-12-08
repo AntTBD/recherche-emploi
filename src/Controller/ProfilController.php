@@ -237,7 +237,7 @@ class ProfilController
                 //Logo d'entreprises
                 if(isset($_FILES['Logo']) && $_FILES['Logo']['name']!="")
                 {
-                    $dossier = 'DocumentsUtilisateurs/LogoEntreprises/';
+                    $dossier = 'DocumentsUtilisateurs/PhotoDeProfil/';
                     $fichier = basename($_FILES['Logo']['name']);
                     $taille_maxi = 100000;
                     $taille = filesize($_FILES['Logo']['tmp_name']);
