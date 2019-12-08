@@ -234,6 +234,109 @@ class ProfilController
                     }
                 }
 
+                //Logo d'entreprises
+                if(isset($_FILES['Logo']) && $_FILES['Logo']['name']!="")
+                {
+                    $dossier = 'DocumentsUtilisateurs/PhotoDeProfil/';
+                    $fichier = basename($_FILES['Logo']['name']);
+                    $taille_maxi = 100000;
+                    $taille = filesize($_FILES['Logo']['tmp_name']);
+                    $extensions = array('.png', '.jpg', '.jpeg');
+                    $extension = strrchr($_FILES['Logo']['name'], '.');
+                    //Verification du fichier uploadé
+                    if(!in_array($extension, $extensions)) //Verification de l'extention
+                    {
+                        $erreur = 'Logo : Vous devez uploader un fichier de type png, jpg ou jpeg';
+                        //envoi d'un message
+                        $typeAlert="warning";
+                        $messageAlert="<b>Logo :</b><br>Vous devez uploader un fichier de type png, jpg ou jpeg";
+                        require __DIR__ . '/../View/messages.php';
+                    }
+                    if($taille>$taille_maxi) //Verification de la taille
+                    {
+                        $erreur = 'Logo : Le fichier est trop gros...';
+                        //envoi d'un message
+                        $typeAlert="warning";
+                        $messageAlert="<b>Logo :</b><br>Le fichier est trop gros...";
+                        require __DIR__ . '/../View/messages.php';
+                    }
+                    if(!isset($erreur))
+                    {
+                        //On remplace les caractères spéciaux
+                        $fichier = strtr($fichier,
+                            'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
+                            'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+                        $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+
+                        $temp = explode(".", $_FILES["Logo"]["name"]);
+                        $newfilename = $_SESSION['id'] . '.' . end($temp);
+
+
+                        if(move_uploaded_file($_FILES["Logo"]["tmp_name"], $dossier . $newfilename))
+                        {
+                            //echo 'Photo de profil : Upload effectué avec succès !';
+                            //envoi d'un message
+                            $typeAlert="success";
+                            $messageAlert="<b>Logo :</b><br>Upload effectué avec succès !";
+                            require __DIR__ . '/../View/messages.php';
+                        }
+                        else
+                        {
+                            //echo 'Photo de profil : Echec de l\'upload !';
+                            //envoi d'un message
+                            $typeAlert="danger";
+                            $messageAlert="<b>Logo :</b><br>Echec de l'upload !";
+                            require __DIR__ . '/../View/messages.php';
+                        }
+                    }
+                }
+
+                /*
+                     //https://www.w3schools.com/php/php_file_upload.asp
+                    $target_dir = "./upload/";
+                    $target_file = $target_dir . basename($_FILES["CV"]["name"]);
+                    $uploadOk = 1;
+                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                    // Check if image file is a actual image or fake image
+                    if(isset($_POST["submit"])) {
+                        $check = getimagesize($_FILES["CV"]["tmp_name"]);
+                        if($check !== false) {
+                            echo "File is an image - " . $check["mime"] . ".";
+                            $uploadOk = 1;
+                        } else {
+                            echo "File is not an image.";
+                            $uploadOk = 0;
+                        }
+                    }
+                    // Check if file already exists
+                    if (file_exists($target_file)) {
+                        echo "Sorry, file already exists.";
+                        $uploadOk = 0;
+                    }
+                    // Check file size
+                    if ($_FILES["CV"]["size"] > 500000) {
+                        echo "Sorry, your file is too large.";
+                        $uploadOk = 0;
+                    }
+                    // Allow certain file formats
+                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" ) {
+                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                        $uploadOk = 0;
+                    }
+                    // Check if $uploadOk is set to 0 by an error
+                    if ($uploadOk == 0) {
+                        echo "Sorry, your file was not uploaded.";
+                        // if everything is ok, try to upload file
+                    } else {
+                        if (move_uploaded_file($_FILES["CV"]["tmp_name"], $target_file)) {
+                            echo "The file ". basename( $_FILES["CV"]["name"]). " has been uploaded.";
+                        } else {
+                            echo "Sorry, there was an error uploading your file.";
+                        }
+                    }
+                */
+
                 //fin des fichiers
 
 
