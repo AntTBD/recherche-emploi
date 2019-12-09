@@ -44,8 +44,8 @@
         <div class="card-body">
             <div class="col-sm-2"></div>
             <div class="col-sm-10">
-                <a class="btn btn-primary btn-success" href="<?= $postuler ?>" class="card-link">Postuler</a>
-                <!--<a class="btn btn-primary btn-warning" href="<?= $favori ?>" class="card-link">Ajouter aux favoris</a> -->
+                <a class="btn btn-primary btn-<?= $postuler['couleur'] ?>" href="<?= $postuler['lien'] ?>" class="card-link"><?= $postuler['text'] ?></a>
+                <a class="btn btn-primary btn-<?= $favoris['couleur'] ?>" href="<?= $favoris['lien'] ?>" class="card-link"><?= $favoris['text'] ?></a>
             </div>
         </div>
     <?php    } ?>

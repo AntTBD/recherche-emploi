@@ -5,9 +5,9 @@ namespace App\Model\Repository;
 
 use App\Model\Repository\Repository;
 use PDO;
-use App\Model\Postuler;
+use App\Model\Favoris;
 
-class PostulerRepository
+class FavorisRepository
 {
     private $base;
 
@@ -16,7 +16,7 @@ class PostulerRepository
     }
 
     public function add($id, $idCandidat){
-        $response = $this->base->prepare('INSERT INTO postuler (id, idCandidat) VALUES(:id, :idCandidat);');
+        $response = $this->base->prepare('INSERT INTO favoris (id, idCandidat) VALUES(:id, :idCandidat);');
         $response->bindValue(':id', $id);
         $response->bindValue(':idCandidat', $idCandidat);
 
@@ -24,7 +24,7 @@ class PostulerRepository
     }
 
     public function exists($id, $idCandidat) {
-        $response = $this->base->prepare('SELECT COUNT(*) FROM postuler WHERE id = :id AND idCandidat = :idCandidat;');
+        $response = $this->base->prepare('SELECT COUNT(*) FROM favoris WHERE id = :id AND idCandidat = :idCandidat;');
         $response->bindValue(':id', $id);
         $response->bindValue(':idCandidat', $idCandidat);
         $response->execute();
@@ -33,7 +33,7 @@ class PostulerRepository
 
     public function delete($id, $idCandidat)
     {
-        $response = $this->base->prepare('DELETE FROM postuler  WHERE id = :id AND idCandidat = :idCandidat;');
+        $response = $this->base->prepare('DELETE FROM favoris  WHERE id = :id AND idCandidat = :idCandidat;');
         $response->bindValue(':id', $id);
         $response->bindValue(':idCandidat', $idCandidat);
         $response->execute();
@@ -46,15 +46,15 @@ class PostulerRepository
 
     public function findByCandidat($idCandidat)
     {
-        $listePostuler=array();
-        $response = $this->base->query('SELECT * FROM postuler WHERE idCandidat = '.$idCandidat.';');
+        $listeFavoris=array();
+        $response = $this->base->query('SELECT * FROM favoris WHERE idCandidat = '.$idCandidat.';');
         while($row = $response->fetch(PDO::FETCH_ASSOC)){
-            $postuler = new Postuler([
+            $favoris = new Favoris([
                 'id' => $row['id'],
                 'idCandidat' => $row['idCandidat']
             ]);
-            array_push($listePostuler,$postuler);
+            array_push($listeFavoris,$favoris);
         }
-        return $listePostuler;
+        return $listeFavoris;
     }
 }

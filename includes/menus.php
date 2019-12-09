@@ -21,8 +21,12 @@ if (isset($_SESSION['id'])) {
         $menu[$i]['nom'] = 'Voir mes annonces';
     }else if(isset($_SESSION["type"]) && $_SESSION["type"]==="Candidat"){
         $i = 2;
-        $menu[$i]['link'] = $dir.'/mesAnnoncesLikes';
+        $menu[$i]['link'] = $dir.'/voirMesAnnoncesLikes';
         $menu[$i]['nom'] = 'Voir mes annonces préférées';
+
+        $i = 3;
+        $menu[$i]['link'] = $dir.'/voirMesAnnoncesPostules';
+        $menu[$i]['nom'] = 'Voir mes candidatures';
 
     }
 

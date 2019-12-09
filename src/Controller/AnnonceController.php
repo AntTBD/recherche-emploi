@@ -2,6 +2,8 @@
 
 
 namespace App\Controller;
+use App\Model\Repository\FavorisRepository;
+use App\Model\Repository\PostulerRepository;
 use App\Model\Repository\TypeContratRepository;
 use App\Model\Repository\VilleRepository;
 use App\Model\Repository\EntrepriseRepository;
@@ -63,13 +65,56 @@ class AnnonceController
             if(sizeof($listeAnnonces)==0){
                 //envoi d'un message
                 $typeAlert="warning";
-                $messageAlert="Vous n'avez pas ou plus d'annonces";
+                $messageAlert="Vous n'avez pas ou plus d'annonces.";
                 require __DIR__ . '/../View/messages.php';
             }
         }else{
             //envoi d'un message
             $typeAlert="warning";
-            $messageAlert="Vous n'êtes pas autoriser à accéder à cette page";
+            $messageAlert="Vous n'êtes pas autoriser à accéder à cette page.";
+            require __DIR__ . '/../View/messages.php';
+        }
+
+        require __DIR__.'/../view/Annonces/listeAnnonces.php';
+    }
+
+    public static function voirMesAnnoncesLikes($base){
+        $annonceRepository = new AnnonceRepository($base);
+        $entrepriseRepository = new EntrepriseRepository($base);
+        $villeRepository = new VilleRepository($base);
+        if (isset($_SESSION['type']) && $_SESSION['type'] == 'Candidat'){
+            $listeAnnonces = $annonceRepository->findByLikeByCandidat($_SESSION['id']);
+            if(sizeof($listeAnnonces)==0){
+                //envoi d'un message
+                $typeAlert="warning";
+                $messageAlert="Vous n'avez pas ou plus d'annonces en favoris.";
+                require __DIR__ . '/../View/messages.php';
+            }
+        }else{
+            //envoi d'un message
+            $typeAlert="warning";
+            $messageAlert="Vous n'êtes pas autoriser à accéder à cette page.";
+            require __DIR__ . '/../View/messages.php';
+        }
+
+        require __DIR__.'/../view/Annonces/listeAnnonces.php';
+    }
+    public static function voirMesAnnoncesPostules($base){
+        $annonceRepository = new AnnonceRepository($base);
+        $entrepriseRepository = new EntrepriseRepository($base);
+        $villeRepository = new VilleRepository($base);
+        if (isset($_SESSION['type']) && $_SESSION['type'] == 'Candidat'){
+            $listeAnnonces = $annonceRepository->findByPostulerByCandidat($_SESSION['id']);
+            if(sizeof($listeAnnonces)==0){
+                //envoi d'un message
+                $typeAlert="warning";
+                $messageAlert="Vous n'avez pas ou plus d'annonces en favoris.";
+                require __DIR__ . '/../View/messages.php';
+            }
+        }else{
+            //envoi d'un message
+            $typeAlert="warning";
+            $messageAlert="Vous n'êtes pas autoriser à accéder à cette page.";
             require __DIR__ . '/../View/messages.php';
         }
 
@@ -154,21 +199,55 @@ class AnnonceController
                 $messageAlert="Cette annonce n'existe pas ! Veuillez en choisir une autre.";
                 require __DIR__ . '/../View/messages.php';
             }else{
-                if(isset($_GET["success"])){
-                    if($_GET["success"]=="true"){
+                if(isset($_GET["successAddPostuler"])){
+                    if($_GET["successAddPostuler"]=="true"){
                         //envoi d'un message
                         $typeAlert="success";
                         $messageAlert="Felicitation ! Vous venez de postuler à cette annonce.";
                         require __DIR__ . '/../View/messages.php';
-                    }else if($_GET["success"]=="false"){
-                        //envoi d'un message
-                        $typeAlert="warning";
-                        $messageAlert="Une erreur est survenu !";
-                        require __DIR__ . '/../View/messages.php';
-                    }else if($_GET["success"]=="dejaPostule") {
+                    }else if($_GET["successAddPostuler"]=="dejaPostule") {
                         //envoi d'un message
                         $typeAlert = "warning";
                         $messageAlert = "Il semble que vous avez déjà postulé à cette annonce.";
+                        require __DIR__ . '/../View/messages.php';
+                    }
+                }
+                if(isset($_GET["successDeletePostuler"])){
+                    if($_GET["successDeletePostuler"]=="true"){
+                        //envoi d'un message
+                        $typeAlert="success";
+                        $messageAlert="Vous venez d'annuler votre candidature.";
+                        require __DIR__ . '/../View/messages.php';
+                    }else if($_GET["successDeletePostuler"]=="pasPostule") {
+                        //envoi d'un message
+                        $typeAlert = "warning";
+                        $messageAlert = "Il semble que vous n'avez pas déjà postulé à cette annonce.";
+                        require __DIR__ . '/../View/messages.php';
+                    }
+                }
+                if(isset($_GET["successAddFavoris"])){
+                    if($_GET["successAddFavoris"]=="true"){
+                        //envoi d'un message
+                        $typeAlert="success";
+                        $messageAlert="Felicitation ! Vous venez de mettre en favoris à cette annonce.";
+                        require __DIR__ . '/../View/messages.php';
+                    }else if($_GET["successAddFavoris"]=="dejaPostule") {
+                        //envoi d'un message
+                        $typeAlert = "warning";
+                        $messageAlert = "Il semble que vous avez déjà mis cette annonce dans vos favoris.";
+                        require __DIR__ . '/../View/messages.php';
+                    }
+                }
+                if(isset($_GET["successDeleteFavoris"])){
+                    if($_GET["successDeleteFavoris"]=="true"){
+                        //envoi d'un message
+                        $typeAlert="success";
+                        $messageAlert="Vous venez de supprimer cette annonce de vos favoris.";
+                        require __DIR__ . '/../View/messages.php';
+                    }else if($_GET["successDeleteFavoris"]=="pasFavoris") {
+                        //envoi d'un message
+                        $typeAlert = "warning";
+                        $messageAlert = "Il semble que vous n'avez pas déjà mis cette annonce dans vos favoris.";
                         require __DIR__ . '/../View/messages.php';
                     }
                 }
@@ -185,7 +264,33 @@ class AnnonceController
 
                 $del = '/index.php/supprimerAnnonce?id='.$annonce->getId();
                 $modif = '/index.php/modifierAnnonce?id='.$annonce->getId();
-                $postuler = '/index.php/postuler?id='.$annonce->getId();
+
+                if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']=="Candidat"){
+                    $postulerRepository = new PostulerRepository($base);
+                    $res = $postulerRepository->exists($_GET['id'], $_SESSION['id']);
+                    if($res){
+                        $postuler['lien'] = '/index.php/deletePostuler?id='.$annonce->getId();
+                        $postuler['text'] = "Ne plus postuler";
+                        $postuler['couleur'] = "danger";
+                    }else{
+                        $postuler['lien'] = '/index.php/postuler?id='.$annonce->getId();
+                        $postuler['text'] = "Postuler";
+                        $postuler['couleur'] = "success";
+                    }
+
+                    $favorisRepository = new FavorisRepository($base);
+                    $res = $favorisRepository->exists($_GET['id'], $_SESSION['id']);
+                    if($res){
+                        $favoris['lien'] = '/index.php/deleteFavoris?id='.$annonce->getId();
+                        $favoris['text'] = "Supprimer des favoris";
+                        $favoris['couleur'] = "danger";
+                    }else{
+                        $favoris['lien'] = '/index.php/favoris?id='.$annonce->getId();
+                        $favoris['text'] = "Ajouter aux favoris";
+                        $favoris['couleur'] = "warning";
+                    }
+                }
+
 
                 require __DIR__.'/../view/Annonces/afficherAnnonce.php';
             }

@@ -3,8 +3,13 @@
 
 namespace App\Model\Repository;
 
+use App\Model\Repository\FavorisRepository;
+use App\Model\Repository\PostulerRepository;
+
 use PDO;
 use App\Model\Annonce;
+use App\Model\Favoris;
+use App\Model\Postuler;
 
 class AnnonceRepository
 {
@@ -124,6 +129,58 @@ class AnnonceRepository
             ]);
             array_push($listeAnnonces,$annonce);
         }
+        return $listeAnnonces;
+    }
+
+    public function findByLikeByCandidat($idCandidat)
+    {
+        $favorisRepository = new FavorisRepository($this->base);
+        $res = $favorisRepository->findByCandidat($_SESSION['id']);
+        $listeAnnonces=array();
+        foreach ($res as $unLike){
+            $response = $this->base->query('SELECT * FROM annonces WHERE id = '.$unLike->getId().';');
+            while($row = $response->fetch(PDO::FETCH_ASSOC)){
+                $annonce = new Annonce([
+                    'id' => $row['id'],
+                    'intitule'      => $row['intitule'],
+                    'domaine'       => $row['domaine'], // le bug été ici avec l'_ entre resume et article
+                    'dateFin'       => $row['dateFin'], // et ici aussi
+                    'salaire'       => $row['salaire'],
+                    'tempsTravail'  => $row['tempsTravail'],
+                    'idEntreprise'  => $row['idEntreprise'],
+                    'idVille'       => $row['idVille'],
+                    'idTypeContrat' => $row['idTypeContrat']
+                ]);
+                array_push($listeAnnonces,$annonce);
+            }
+        }
+
+        return $listeAnnonces;
+    }
+
+    public function findByPostulerByCandidat($idCandidat)
+    {
+        $postulerRepository = new PostulerRepository($this->base);
+        $res = $postulerRepository->findByCandidat($_SESSION['id']);
+        $listeAnnonces=array();
+        foreach ($res as $unLike){
+            $response = $this->base->query('SELECT * FROM annonces WHERE id = '.$unLike->getId().';');
+            while($row = $response->fetch(PDO::FETCH_ASSOC)){
+                $annonce = new Annonce([
+                    'id' => $row['id'],
+                    'intitule'      => $row['intitule'],
+                    'domaine'       => $row['domaine'], // le bug été ici avec l'_ entre resume et article
+                    'dateFin'       => $row['dateFin'], // et ici aussi
+                    'salaire'       => $row['salaire'],
+                    'tempsTravail'  => $row['tempsTravail'],
+                    'idEntreprise'  => $row['idEntreprise'],
+                    'idVille'       => $row['idVille'],
+                    'idTypeContrat' => $row['idTypeContrat']
+                ]);
+                array_push($listeAnnonces,$annonce);
+            }
+        }
+
         return $listeAnnonces;
     }
 
