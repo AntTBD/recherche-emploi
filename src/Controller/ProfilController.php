@@ -24,16 +24,13 @@ class ProfilController
                 if(isset($_POST['prenom'])){
                     $user = new Candidat([
                         'mail' => $_POST['email'],
-                        'mdp' => 'ui',
                         'nom' => $_POST['nom'],
                         'tel' => $_POST['tel'],
-                        'prenom' => $_POST['prenom'],
-                        'civilite' => 'ui'
+                        'prenom' => $_POST['prenom']
                     ]);
                 } else if(isset($_POST['description'])){
                     $user = new Entreprise([
                         'mail' => $_POST['email'],
-                        'mdp' => 'ui',
                         'nom' => $_POST['nom'],
                         'tel' => $_POST['tel'],
                         'adresse' => $_POST['adresse'],
@@ -294,6 +291,10 @@ class ProfilController
                 }
                 //fin des fichiers
 
+                $villeRepository = new VilleRepository($base);
+                $listeVilles = array();
+                foreach ($villeRepository->findAll() as $ville)
+                    array_push($listeVilles, $ville);
 
                 require __DIR__ . '/../View/Profil/mon_profil_'.strtolower($_SESSION['type']).'.php';
             }

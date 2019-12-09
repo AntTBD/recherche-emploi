@@ -28,12 +28,14 @@
             </div>
             <div class="form-group">
                 <div class="form-row">
-                    <label class="col-sm-2 col-form-label" for="adresse">Adresse</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="text" name="ville" id="ville" placeholder="Entrer votre ville">
-                    </div>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="number" name="cp" id="cp" placeholder="Entrer votre code postal">
+                    <label class="col-sm-2 col-form-label" for="ville">Adresse</label>
+                    <div class="col-sm-10">
+                        <select class="form-control custom-select mr-sm-2" id="ville" name="ville">
+                            <option value="">Choisir votre ville</option>
+                            <?php foreach ($listeVilles as $ville) { ?>
+                                <option value="<?= $ville->getNom() ?>"><?= $ville->getNom() ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
             </div>

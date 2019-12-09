@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Model\Candidat;
 use App\Model\Entreprise;
+use App\Model\Repository\VilleRepository;
 use App\Model\Utilisateur;
 use App\Model\Repository\CandidatRepository;
 use App\Model\Repository\EntrepriseRepository;
@@ -56,6 +57,11 @@ class ConnexionController
             $messageAlert="Vous êtes déjà connecté";
             require __DIR__ . '/../View/messages.php';
         } else {
+            $villeRepository = new VilleRepository($base);
+            $listeVilles = array();
+            foreach ($villeRepository->findAll() as $ville)
+                array_push($listeVilles, $ville);
+
             if (isset($_POST['email']) && isset($_POST['password'])) {
                 if(isset($_POST['nom']) && isset($_POST['tel'])){
                     $user=null;
@@ -71,17 +77,13 @@ class ConnexionController
                             ]);
                         }
                     }elseif($class=='Entreprise'){
-                        if(isset($_POST['siteInternet']) && isset($_POST['description']) && isset($_POST['ville']) && isset($_POST['cp']) ){
-                            $ville=null;
-                            if($_POST['ville']!=null && $_POST['cp']!=null){
-                                $ville=$_POST['ville'].'('.$_POST['cp'].')';
-                            }
+                        if(isset($_POST['siteInternet']) && isset($_POST['description']) && isset($_POST['ville']) ){
                             $user = new Entreprise([
                                 'mail' => $_POST['email'],
                                 'mdp' => password_hash($_POST['password'], PASSWORD_ARGON2I),
                                 'nom' => $_POST['nom'],
                                 'tel' => $_POST['tel'],
-                                'adresse' => $ville,
+                                'adresse' => $_POST['ville'],
                                 'siteInternet' => $_POST['siteInternet'],
                                 'description' => $_POST['description']
                             ]);

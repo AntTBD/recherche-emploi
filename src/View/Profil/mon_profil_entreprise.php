@@ -14,7 +14,7 @@
                   <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                     <input type="file" name = "USERFILE">
                     <input type="file" class="custom-file-input" id="Logo" name="Logo" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="Logo" data-browse="Partager">Indiquez le logo que vous souhaitez utiliser</label>
+                    <label class="custom-file-label" for="Logo" data-browse="Choisir">Indiquez le logo que vous souhaitez utiliser</label>
                 </div>
               </div>
           </div>
@@ -37,9 +37,14 @@
                 </div>
             </div>
             <div class="form-group form-row">
-                <label class="col-sm-2 col-form-label" for="adresse">Adresse</label>
+                <label class="col-sm-2 col-form-label" for="adresse">Ville</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="adresse" id="adresse">
+                    <select class="form-control custom-select mr-sm-2" id="adresse" name="adresse">
+                        <option value="">Choisir votre ville</option>
+                        <?php foreach ($listeVilles as $ville) { ?>
+                            <option value="<?= $ville->getNom() ?>"><?= $ville->getNom() ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
             </div>
             <div class="form-group form-row">
@@ -58,7 +63,7 @@
                 <div class="col-sm-2"></div>
                 <div class="col-sm-20">
                     <button class="btn btn-primary btn-success" type="submit">Modifier mes informations</button>
-                    <button class="btn btn-primary btn-danger" type="reset">Annuler</button>
+                    <button class="btn btn-primary btn-danger" type="button" onclick="loadInfos()">Annuler</button>
                 </div>
             </div>
         </form>
@@ -66,12 +71,19 @@
     </div>
 </div>
     <script>
-        document.getElementById("nom").value="<?= $user->getNom() ?>";
-        document.getElementById("tel").value="<?= $user->getTel() ?>";
-        document.getElementById("email").value="<?= $user->getMail() ?>";
-        document.getElementById("adresse").value="<?= $user->getAdresse() ?>";
-        document.getElementById("siteInternet").value="<?= $user->getSiteInternet() ?>";
-        document.getElementById("description").innerHTML="<?= $user->getDescription() ?>";
+        function loadInfos(){
+            document.getElementById("nom").value="<?= $user->getNom() ?>";
+            document.getElementById("tel").value="<?= $user->getTel() ?>";
+            document.getElementById("email").value="<?= $user->getMail() ?>";
+            // https://stackoverflow.com/questions/13343566/set-select-option-selected-by-value
+            $('#adresse option')
+                .removeAttr('selected')
+                .filter('[value=<?= $user->getAdresse() ?>]')
+                .attr('selected', true);
+            document.getElementById("siteInternet").value="<?= $user->getSiteInternet() ?>";
+            document.getElementById("description").innerHTML="<?= $user->getDescription() ?>";
+        }
+        loadInfos();
     </script>
 <!-- formulaire profil entreprise -->
 
