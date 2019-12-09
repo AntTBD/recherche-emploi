@@ -7,6 +7,7 @@ use App\Model\Utilisateur;
 use App\Model\Repository\CandidatRepository;
 use App\Model\Repository\EntrepriseRepository;
 use App\Model\Repository\UtilisateurRepository;
+use App\Model\Repository\PostulerRepository;
 
 class ProfilController
 {

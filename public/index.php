@@ -9,7 +9,7 @@ use App\Controller\ConnexionController;
 use App\Controller\DefaultController;
 use App\Controller\AnnonceController;
 use App\Controller\ProfilController;
-
+use App\Controller\PostulerController;
 
 // route the request internally
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -31,8 +31,10 @@ if ('/index.php' == $uri || '/' == $uri) {
     ConnexionController::deconnexion();
 } elseif ('/index.php/ajoutAnnonce' == $uri){
     AnnonceController::ajoutAnnonce($base);
-} elseif('/index.php/voirAnnonces' == $uri){
-    AnnonceController::voirAnnonces($base);
+} elseif('/index.php/voirMesAnnonces' == $uri){
+    AnnonceController::voirMesAnnonces($base);
+} elseif('/index.php/voirAllAnnonces' == $uri){
+    AnnonceController::voirAllAnnonces($base);
 } elseif('/index.php/afficherAnnonce' == $uri){
     AnnonceController::afficherAnnonce($base);
 } elseif('/index.php/modifierAnnonce' == $uri){
@@ -41,6 +43,8 @@ if ('/index.php' == $uri || '/' == $uri) {
     AnnonceController::supprimerAnnonce($base);
 }elseif ('/index.php/mon_profil' == $uri) {
     ProfilController::mon_profil($base);
+}elseif ('/index.php/postuler' == $uri) {
+    PostulerController::postuler($base);
 } else {
     DefaultController::erreur404();
 }

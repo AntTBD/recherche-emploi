@@ -17,7 +17,7 @@ if (isset($_SESSION['id'])) {
         $menu[$i]['nom'] = 'Ajouter une annonce';
 
         $i = 3;
-        $menu[$i]['link'] = $dir.'/voirAnnonces';
+        $menu[$i]['link'] = $dir.'/voirMesAnnonces';
         $menu[$i]['nom'] = 'Voir mes annonces';
     }else if(isset($_SESSION["type"]) && $_SESSION["type"]==="Candidat"){
         $i = 2;

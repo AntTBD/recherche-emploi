@@ -88,6 +88,24 @@ class AnnonceRepository
 
     }
 
+    public function findByParam($parameters, $values)
+    {
+        $req = 'SELECT * FROM annonces WHERE ';
+        for($i = 0; $i < count($parameters); $i++) {
+            if($i > 0){
+                $req.=" AND ";
+            }
+            $req.=$parameters[$i].' = \''.$values[$i].'\'';
+        }
+        $req.=';';
+        $query = $this->base->query($req);
+        $listeAnnonces=array();
+        while($annonce_temp = $query->fetch(PDO::FETCH_ASSOC)){
+            array_push($listeAnnonces, new Annonce($annonce_temp));
+        }
+        return $listeAnnonces;
+    }
+
     public function findByEntreprise($idEntreprise)
     {
         $listeAnnonces=array();
