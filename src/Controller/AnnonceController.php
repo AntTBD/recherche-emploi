@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+use App\Model\Repository\CandidatRepository;
 use App\Model\Repository\FavorisRepository;
 use App\Model\Repository\PostulerRepository;
 use App\Model\Repository\TypeContratRepository;
@@ -262,32 +263,37 @@ class AnnonceController
                 $villeRepository = new VilleRepository($base);
                 $ville = $villeRepository->find($annonce->getIdVille());
 
-                $del = '/index.php/supprimerAnnonce?id='.$annonce->getId();
-                $modif = '/index.php/modifierAnnonce?id='.$annonce->getId();
 
-                if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']=="Candidat"){
-                    $postulerRepository = new PostulerRepository($base);
-                    $res = $postulerRepository->exists($_GET['id'], $_SESSION['id']);
-                    if($res){
-                        $postuler['lien'] = '/index.php/deletePostuler?id='.$annonce->getId();
-                        $postuler['text'] = "Ne plus postuler";
-                        $postuler['couleur'] = "danger";
-                    }else{
-                        $postuler['lien'] = '/index.php/postuler?id='.$annonce->getId();
-                        $postuler['text'] = "Postuler";
-                        $postuler['couleur'] = "success";
-                    }
 
-                    $favorisRepository = new FavorisRepository($base);
-                    $res = $favorisRepository->exists($_GET['id'], $_SESSION['id']);
-                    if($res){
-                        $favoris['lien'] = '/index.php/deleteFavoris?id='.$annonce->getId();
-                        $favoris['text'] = "Supprimer des favoris";
-                        $favoris['couleur'] = "danger";
-                    }else{
-                        $favoris['lien'] = '/index.php/favoris?id='.$annonce->getId();
-                        $favoris['text'] = "Ajouter aux favoris";
-                        $favoris['couleur'] = "warning";
+                if(isset($_SESSION['id']) && isset($_SESSION['type'])){
+                    if($_SESSION['type']=="Candidat") {
+                        $postulerRepository = new PostulerRepository($base);
+                        $res = $postulerRepository->exists($_GET['id'], $_SESSION['id']);
+                        if ($res) {
+                            $postuler['lien'] = '/index.php/deletePostuler?id=' . $annonce->getId();
+                            $postuler['text'] = "Ne plus postuler";
+                            $postuler['couleur'] = "danger";
+                        } else {
+                            $postuler['lien'] = '/index.php/postuler?id=' . $annonce->getId();
+                            $postuler['text'] = "Postuler";
+                            $postuler['couleur'] = "success";
+                        }
+
+                        $favorisRepository = new FavorisRepository($base);
+                        $res = $favorisRepository->exists($_GET['id'], $_SESSION['id']);
+                        if ($res) {
+                            $favoris['lien'] = '/index.php/deleteFavoris?id=' . $annonce->getId();
+                            $favoris['text'] = "Supprimer des favoris";
+                            $favoris['couleur'] = "danger";
+                        } else {
+                            $favoris['lien'] = '/index.php/favoris?id=' . $annonce->getId();
+                            $favoris['text'] = "Ajouter aux favoris";
+                            $favoris['couleur'] = "warning";
+                        }
+                    }else if($_SESSION['type']=="Entreprise"){
+                        $del = '/index.php/supprimerAnnonce?id='.$annonce->getId();
+                        $modif = '/index.php/modifierAnnonce?id='.$annonce->getId();
+                        $candidatures = '/index.php/afficherCandidats?id='.$annonce->getId();
                     }
                 }
 
@@ -398,4 +404,40 @@ class AnnonceController
         }
 
     }
+
+    public static function afficherCandidats($base) {
+        if(isset($_GET['id'])){
+            $annonceRepository = new AnnonceRepository($base);
+            $candidatRepository = new CandidatRepository($base);
+            $annonce = $annonceRepository->findById($_GET['id']);
+            $listeCandidats=array();
+            if(!$annonce){
+                //envoi d'un message
+                $typeAlert="warning";
+                $messageAlert="Cette annonce n'existe pas ! Veuillez en choisir une autre.";
+                require __DIR__ . '/../View/messages.php';
+            }else{
+                $result = $candidatRepository->findAllByAnnonce($annonce->getId());
+                if($result!=false){
+                    foreach ($result as $candidat){
+                        array_push($listeCandidats, $candidat);
+                    }
+                }
+                if(sizeof($listeCandidats)<=0){
+                    //envoi d'un message
+                    $typeAlert="warning";
+                    $messageAlert="Il n'y a pas de candidats pour cette annonce.";
+                    require __DIR__ . '/../View/messages.php';
+                }else{
+                    require __DIR__.'/../view/Annonces/listeCandidats.php';
+                }
+            }
+        }else{
+            //envoi d'un message
+            $typeAlert="warning";
+            $messageAlert="Veuillez selectionner une annonce avant de voir les candidats.";
+            require __DIR__ . '/../View/messages.php';
+        }
+    }
+
 }

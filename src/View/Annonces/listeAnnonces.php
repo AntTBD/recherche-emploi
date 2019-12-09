@@ -6,7 +6,7 @@ foreach ($listeAnnonces as $annonce) {
     <div class="mt-3">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title"><?= $annonce->getIntitule(); ?></h1>
+                <h1 class="card-title"><?= $annonce->getIntitule() ?></h1>
             </div>
             <div class="card-body">
                 <h2 class="display-5"><?= $annonce->getDomaine() ?></h2>

@@ -34,6 +34,10 @@ if ('/index.php' == $uri || '/' == $uri) {
     AnnonceController::ajoutAnnonce($base);
 } elseif('/index.php/voirMesAnnonces' == $uri){
     AnnonceController::voirMesAnnonces($base);
+}elseif('/index.php/afficherCandidats' == $uri){
+    AnnonceController::afficherCandidats($base);
+} elseif('/index.php/afficherProfil' == $uri){
+    ProfilController::afficherProfil($base);
 } elseif('/index.php/voirMesAnnoncesLikes' == $uri){
     AnnonceController::voirMesAnnoncesLikes($base);
 }elseif('/index.php/voirMesAnnoncesPostules' == $uri){

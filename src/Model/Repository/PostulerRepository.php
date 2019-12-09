@@ -57,4 +57,18 @@ class PostulerRepository
         }
         return $listePostuler;
     }
+
+    public function findById($id)
+    {
+        $listePostuler=array();
+        $response = $this->base->query('SELECT * FROM postuler WHERE id = '.$id.';');
+        while($row = $response->fetch(PDO::FETCH_ASSOC)){
+            $postuler = new Postuler([
+                'id' => $row['id'],
+                'idCandidat' => $row['idCandidat']
+            ]);
+            array_push($listePostuler,$postuler);
+        }
+        return $listePostuler;
+    }
 }

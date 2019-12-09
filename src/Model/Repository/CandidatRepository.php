@@ -4,6 +4,7 @@
 namespace App\Model\Repository;
 
 use App\Model\Candidat;
+use App\Model\Postuler;
 use PDO;
 
 
@@ -27,5 +28,23 @@ class CandidatRepository extends UtilisateurRepository
             return false;
         }
         return false;
+    }
+
+    public function findAllByAnnonce($idAnnonce){
+        $postulerRepository = new PostulerRepository($this->base);
+        $res = $postulerRepository->findById($idAnnonce);
+        $listeCandidats=array();
+        foreach ($res as $uneAnnonce){
+            $response = $this->base->query('SELECT *
+                                                FROM utilisateurs
+                                                INNER JOIN candidats ON candidats.id = utilisateurs.id
+                                                WHERE utilisateurs.id = '.$uneAnnonce->getIdCandidat().';');
+            while($row = $response->fetch(PDO::FETCH_ASSOC)){
+                $user = new Candidat($row);
+                array_push($listeCandidats,$user);
+            }
+        }
+
+        return $listeCandidats;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Model\Candidat;
 use App\Model\Entreprise;
+use App\Model\Repository\VilleRepository;
 use App\Model\Utilisateur;
 use App\Model\Repository\CandidatRepository;
 use App\Model\Repository\EntrepriseRepository;
@@ -302,7 +303,46 @@ class ProfilController
             $messageAlert="Vous n'avez pas accès à cette page.";
             require __DIR__ . '/../View/messages.php';
         }
+    }
 
+    public static function afficherProfil($base) {
+        if(isset($_GET['id']) && isset($_GET['type'])){
+            if($_GET['type'] ==="Entreprise"){
+                $userRepository = new EntrepriseRepository($base);
+                $user = $userRepository->find($_GET['id']);
+            }else if($_GET['type'] ==="Candidat"){
+                if(isset($_SESSION['type']) && $_SESSION['type'] === 'Entreprise'){
+                    $userRepository = new CandidatRepository($base);
+                    $user = $userRepository->find($_GET['id']);
+                }else{
+                    $user=false;
+                    //envoi d'un message
+                    $typeAlert="warning";
+                    $messageAlert="Vous n'avez accès à ce profil !";
+                    require __DIR__ . '/../View/messages.php';
+                    return;
+                }
+            }
+            if(!$user){
+                //envoi d'un message
+                $typeAlert="warning";
+                $messageAlert="Ce profil n'existe pas ! Veuillez en choisir une autre.";
+                require __DIR__ . '/../View/messages.php';
+            }else{
+                if($user instanceof Entreprise){
 
+                    require __DIR__.'/../view/Profil/afficherUnProfil_Entreprise.php';
+                }else if($user instanceof Candidat){
+
+                    require __DIR__.'/../view/Profil/afficherUnProfil_Candidat.php';
+                }
+                var_dump($user);
+            }
+        }else{
+            //envoi d'un message
+            $typeAlert="warning";
+            $messageAlert="Veuillez selectionner un profil.";
+            require __DIR__ . '/../View/messages.php';
+        }
     }
 }
