@@ -51,4 +51,3 @@
     <?php    } ?>
 </div>
 <!-- fin affichage d'une annonce -->
-
