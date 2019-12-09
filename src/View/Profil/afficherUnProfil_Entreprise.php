@@ -20,7 +20,26 @@
     </div>
     <ul class="list-group list-group-flush text-dark">
 
-        <!-- reprend l'affichage d'une annonce en faite -->
+      <!-- affichage d'une annonce -->
+      <div class="card background_profil">
+          <div class="card-body text-dark">
+              <h5 class="display-5">Téléphone : <?= $user->getTel() ?></h5>
+          </div>
+          <div class="card-body text-dark">
+              <h5 class="display-5">Email : <?= $user->getMail() ?></h5>
+          </div>
+          <div class="card-body text-dark">
+              <h5 class="display-5">Ville : <?= $user->getAdresse() ?></h5>
+          </div>
+          <div class="card-body text-dark">
+
+              <h5 class="display-5" >Site web : <a href="<?= $user->getSiteInternet() ?>"><?= $user->getSiteInternet() ?></a></h5>
+          </div>
+          <div class="card-body text-dark">
+              <h5 class="display-5">Description de la socoiété : <?= $user->getDescription() ?></h5>
+          </div>
+          </ul>
+      </div>
 
     </ul>
 </div>

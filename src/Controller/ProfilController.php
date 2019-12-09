@@ -336,7 +336,6 @@ class ProfilController
 
                     require __DIR__.'/../view/Profil/afficherUnProfil_Candidat.php';
                 }
-                var_dump($user);
             }
         }else{
             //envoi d'un message
