@@ -20,7 +20,7 @@
     </div>
     <ul class="list-group list-group-flush text-dark">
 
-      <!-- affichage d'une annonce -->
+      <!-- affichage d'un profil entreprise -->
       <div class="card background_profil">
           <div class="card-body text-dark">
               <h5 class="display-5">Téléphone : <?= $user->getTel() ?></h5>
@@ -38,9 +38,7 @@
           <div class="card-body text-dark">
               <h5 class="display-5">Description de la socoiété : <?= $user->getDescription() ?></h5>
           </div>
-          </ul>
       </div>
-
-    </ul>
+    </ul>  
 </div>
-<!-- fin affichage d'un profil Candidat -->
+<!-- fin affichage d'un profil entreprise -->

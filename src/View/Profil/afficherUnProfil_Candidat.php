@@ -26,8 +26,72 @@
     </div>
     <ul class="list-group list-group-flush text-dark">
 
-        <!-- reprend l'affichage d'une annonce en faite -->
-
+      <!-- affichage d'un profil entreprise -->
+      <div class="card background_profil">
+          <div class="card-body text-dark">
+              <h5 class="display-5">Téléphone : <?= $user->getTel() ?></h5>
+          </div>
+          <div class="card-body text-dark">
+              <h5 class="display-5">Email : <?= $user->getMail() ?></h5>
+          </div>
+          <div class="card-body text-dark">
+            <?php
+            $CV="DocumentsUtilisateurs/CV/".$user->getId();
+            if(file_exists ($CV.".png")){
+               $file=$CV.".png";
+               ?>
+                   <h5 class="display-5">CV : <a href="../<?= $file ?>">Télécharger</a></h5>
+               <?php
+              }else if(file_exists ($CV.".jpg")){
+              ?>
+                  <h5 class="display-5">CV : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$CV.".jpg";
+              }else if(file_exists ($CV.".jpeg")){
+              ?>
+                  <h5 class="display-5">CV : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$CV.".jpeg";
+              }else if(file_exists ($CV.".pdf")){
+              ?>
+                  <h5 class="display-5">CV : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$CV.".pdf";
+              }
+              else{
+              ?>
+                <h5 class="display-5">CV : non communiquée</h5>
+          <?php  } ?>
+          </div>
+          <div class="card-body text-dark">
+            <?php
+            $LM="DocumentsUtilisateurs/LettreMotivation/".$user->getId();
+            if(file_exists ($LM.".png")){
+               $file=$LM.".png";
+               ?>
+                   <h5 class="display-5">Lettre de motivation : <a href="../<?= $file ?>">Télécharger</a></h5>
+               <?php
+              }else if(file_exists ($LM.".jpg")){
+              ?>
+                  <h5 class="display-5">Lettre de motivation : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$LM.".jpg";
+              }else if(file_exists ($LM.".jpeg")){
+              ?>
+                  <h5 class="display-5">Lettre de motivation : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$LM.".jpeg";
+              }else if(file_exists ($LM.".pdf")){
+              ?>
+                  <h5 class="display-5">Lettre de motivation : <a href="../<?= $file ?>">Télécharger</a></h5>
+              <?php
+               $file=$LM.".pdf";
+              }
+              else{
+              ?>
+                <h5 class="display-5">Lettre de motivation : non communiquée</h5>
+          <?php  } ?>
+          </div>
+      </div>
     </ul>
-</div>
 <!-- fin affichage d'un profil Candidat -->
