@@ -14,7 +14,7 @@
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                         <input type="file" name = "PP">
                         <input type="file" class="custom-file-input" id="PP" name="PP" aria-describedby="Photo de profil">
-                        <label class="custom-file-label" for="PP" data-browse="Partager">Indiquez votre photo de profil que vous souhaitez utiliser</label>
+                        <label class="custom-file-label" for="PP" data-browse="Choisir">Indiquez votre photo de profil que vous souhaitez utiliser</label>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                         <input type="file" name = "CV">
                         <input type="file" class="custom-file-input" id="CV" name="CV" aria-describedby="CV">
-                        <label class="custom-file-label" for="CV" data-browse="Partager">Indiquez le CV que vous souhaitez utiliser</label>
+                        <label class="custom-file-label" for="CV" data-browse="Choisir">Indiquez le CV que vous souhaitez utiliser</label>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                         <input type="file" name = "LM">
                         <input type="file" class="custom-file-input" id="LM" name="LM" aria-describedby="Lettre de motivation">
-                        <label class="custom-file-label" for="LM" data-browse="Partager">Indiquez la lettre de motivation que vous souhaitez utiliser</label>
+                        <label class="custom-file-label" for="LM" data-browse="Choisir">Indiquez la lettre de motivation que vous souhaitez utiliser</label>
                     </div>
                 </div>
             </div>
