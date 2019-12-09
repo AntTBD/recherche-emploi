@@ -28,8 +28,8 @@ foreach ($listeCandidats as $candidat) { ?>
                 </center>
             </div>
             <div class="card-body">
-                <p class="card-text"><b>Email : </b><?= $candidat->getMail() ?></p>
-                <p class="card-text"><b>Téléphone : </b><?= $candidat->getTel() ?></p>
+                <p class="card-text"><b>Téléphone : </b><?php if($candidat->getTel()!=""){ echo $candidat->getTel(); }else{echo "Non communiqué";} ?></p>
+                <p class="card-text"><b>Email : </b><?php if($candidat->getMail()!=""){ echo $candidat->getMail(); }else{echo "Non communiqué";} ?></p>
                 <a href="/index.php/afficherProfil?id=<?= $candidat->getId() ?>&type=<?= $candidat->getClassName() ?>" class="btn btn-primary">Voir plus</a>
             </div>
         </div>

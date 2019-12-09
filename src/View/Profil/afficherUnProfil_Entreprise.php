@@ -1,4 +1,4 @@
-<!-- affichage d'un profil Candidat -->
+<!-- affichage d'un profil Entreprise -->
 <div class="card background_profil_entreprise">
     <div class="card-header">
         <div class="text-center justify-content-center">
@@ -19,26 +19,21 @@
         </div>
     </div>
     <ul class="list-group list-group-flush text-dark">
-
-      <!-- affichage d'un profil entreprise -->
-      <div class="card background_profil">
-          <div class="card-body text-dark">
-              <h5 class="display-5">Téléphone : <?= $user->getTel() ?></h5>
-          </div>
-          <div class="card-body text-dark">
-              <h5 class="display-5">Email : <?= $user->getMail() ?></h5>
-          </div>
-          <div class="card-body text-dark">
-              <h5 class="display-5">Ville : <?= $user->getAdresse() ?></h5>
-          </div>
-          <div class="card-body text-dark">
-
-              <h5 class="display-5" >Site web : <a href="<?= $user->getSiteInternet() ?>"><?= $user->getSiteInternet() ?></a></h5>
-          </div>
-          <div class="card-body text-dark">
-              <h5 class="display-5">Description de la socoiété : <?= $user->getDescription() ?></h5>
-          </div>
-      </div>
-    </ul>  
+        <li class="list-group-item">
+            <p class="card-text"><b>Téléphone : </b><?= $user->getTel() ?></p>
+        </li>
+        <li class="list-group-item">
+            <p class="card-text"><b>Email : </b><?= $user->getMail() ?></p>
+        </li>
+        <li class="list-group-item">
+            <p class="card-text"><b>Ville : </b><?= $user->getAdresse() ?></p>
+        </li>
+        <li class="list-group-item">
+            <p class="card-text"><b>Site web : </b><a href="<?= $user->getSiteInternet() ?>"><?= $user->getSiteInternet() ?></a></p>
+        </li>
+        <li class="list-group-item">
+            <p class="card-text"><b>Description de la socoiété : </b><?= $user->getDescription() ?></p>
+        </li>
+    </ul>
 </div>
 <!-- fin affichage d'un profil entreprise -->
