@@ -141,7 +141,7 @@ class AnnonceController
         }
         foreach ($villeRepository->findAll() as $ville)
             array_push($listeVilles, $ville);
-        
+
 
         if(isset($_POST['idTypeContrat']) && $_POST['idTypeContrat']!=null){
             array_push($parametres,"idTypeContrat");

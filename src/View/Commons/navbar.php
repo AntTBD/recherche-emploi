@@ -45,7 +45,7 @@ include __DIR__ . '/../../../includes/function.php';
                                             if ($_SESSION['civilite'] == "Mr") { ?>
                                                 /fichiers/avatars/avatarH.png
                                             <?php } elseif ($_SESSION['civilite'] == "Mme") { ?>
-                                                /fichiers/avatars/defaultF.png
+                                                /fichiers/avatars/avatarF.png
                                             <?php } ?>" alt="" width="35" height="35"
                                              style="border-radius: 50%;border-color: black;">
                                         <?php }

@@ -15,7 +15,7 @@ foreach ($listeCandidats as $candidat) { ?>
                         if ($candidat->getCivilite() == "Mr") { ?>
                                 /fichiers/avatars/avatarH.png
                             <?php } elseif ($candidat->getCivilite()  == "Mme") { ?>
-                                /fichiers/avatars/defaultF.png
+                                /fichiers/avatars/avatarF.png
                             <?php } ?>" alt="" width="50" height="50"
                              style="border-radius: 50%;border-color: black;">
                     <?php }else{?>
