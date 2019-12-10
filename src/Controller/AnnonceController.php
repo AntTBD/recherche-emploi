@@ -135,12 +135,13 @@ class AnnonceController
         $values=array();
 
         foreach ($annonceRepository->findAll() as $annonce){
-            array_push($listeDomaines, $annonce->getDomaine());
-
-            foreach ($villeRepository->findAll() as $ville)
-            array_push($listeVilles, $ville);
+            if(!in_array($annonce->getDomaine(), $listeDomaines)){
+                array_push($listeDomaines, $annonce->getDomaine());
+            }
         }
-
+        foreach ($villeRepository->findAll() as $ville)
+            array_push($listeVilles, $ville);
+        
 
         if(isset($_POST['idTypeContrat']) && $_POST['idTypeContrat']!=null){
             array_push($parametres,"idTypeContrat");
