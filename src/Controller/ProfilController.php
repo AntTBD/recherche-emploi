@@ -155,7 +155,7 @@ class ProfilController
 
                         $temp = explode(".", $_FILES["CV"]["name"]);
                         $newfilename = $_SESSION['id'] . '.' . end($temp);
-                        
+
                         if(move_uploaded_file($_FILES["CV"]["tmp_name"], $dossier . $newfilename))
                         {
                             //echo 'CV : Upload effectué avec succès !';
