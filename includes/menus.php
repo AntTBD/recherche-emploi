@@ -6,7 +6,7 @@ $menu[$i]['link'] = $dir;
 $menu[$i]['nom'] = 'Accueil';
 
 $i = 1;
-$menu[$i]['link'] = $dir.'/recherche_offres';
+$menu[$i]['link'] = $dir.'/voirAllAnnonces';
 $menu[$i]['nom'] = 'Rechercher une offre';
 
 
