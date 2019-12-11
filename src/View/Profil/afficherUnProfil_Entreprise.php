@@ -3,11 +3,11 @@
     <div class="card-header">
         <div class="text-center justify-content-center">
             <?php
-            $photoDeProfil="DocumentsUtilisateurs/Logo/".$user->getId();
+            $photoDeProfil="DocumentsUtilisateurs/PhotoDeProfil/".$user->getId();
             if(file_exists ($photoDeProfil.".png")){ $photoDeProfil=$photoDeProfil.".png"; }
             else if(file_exists ($photoDeProfil.".jpg")){ $photoDeProfil=$photoDeProfil.".jpg"; }
             else if(file_exists ($photoDeProfil.".jpeg")){ $photoDeProfil=$photoDeProfil.".jpeg"; }
-            if($photoDeProfil==="DocumentsUtilisateurs/Logo/".$user->getId()){  ?>
+            if($photoDeProfil==="DocumentsUtilisateurs/PhotoDeProfil/".$user->getId()){  ?>
                 <img class="d-inline-block align-middle" src="/fichiers/avatars/avatarEntreprise.png" alt="" width="100" height="100" style="border-radius: 50%;border-color: black;">
             <?php }else{?>
                 <img class="d-inline-block align-middle"

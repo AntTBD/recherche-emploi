@@ -319,7 +319,7 @@ class AnnonceController
             if($exist){
                 $result = $annonceRepository->delete($_GET['id']);
                 if($result){
-                    header('Location: /index.php/voirAnnonces');
+                    header('Location: /index.php/voirAllAnnonces');
                 }else{
                     //envoi d'un message
                     $typeAlert="danger";
